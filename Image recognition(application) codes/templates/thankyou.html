@@ -1,0 +1,99 @@
+  
+  <!-- 
+NAME @: Nimish Dalvi 
+TOPIC @: Cotton Leaf Disease Classification Model Deployment
+DATE @: 09/06/2022 
+-->
+
+
+ <!----------------------------- BASE SECTION  ----------------------------------->
+
+{% extends "base.html"%}
+
+  <!------------------------------------------------------------------------------->
+
+{% block content %}
+
+
+  <!-------------------------- THANKYOU BODY SECTION ------------------------------->
+
+
+<div class=" w3-pale-yellow">
+  
+<div class="w3-center w3-padding-64">
+  <h1>Voila. Your image was submitted</h1>
+  <hr>
+  {% if file_url %}
+  <br>
+  <img src = "{{file_url}}" width="720" height="480" border ="5">
+  <h4>{{file_url}}</h4>
+  {% endif %}
+</div>
+
+
+  <!---------------------------- PREDICTION   SECTION  ---------------------------------->
+
+<div class=" w3-pale-blue w3-center">
+  <h1>
+    <hr>
+    <br>
+    {% if results %}
+      Here are the Cotton Diseases classified with confidences for threshold > 0.75 :
+      <br>
+      <br>
+      <style type="text/css">
+      table, th, td {
+        border: 2px solid white;
+        border-collapse: collapse;
+      }
+
+      th, td {
+        background-color: #a4e3a3;
+      }
+      </style>
+      <table align = 'center'>
+        <thead>
+          <tr>
+            <th>Crop</th>
+            <th>Confidence</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for key, value in results.items() %}
+          <tr>
+            <td> {{ key }} </td>
+            <td> {{ value }} %</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <!-- {{results}}. -->
+     
+    {% else %}
+      Sorry an error occured. 
+      <br>
+      Contact the admin.
+    {% endif %}
+  </h1>
+
+  <br>
+  <br>
+  <br>
+</div>
+  <div class=" w3-pale-red w3-center">
+    <style type="text/css">
+      .astyle {
+        font-size: 30px;
+        border: 2px solid black;
+        border-collapse: collapse;
+      }
+     </style>
+    <a class="astyle" href="{{ url_for('index') }}"> Classify Again</a>
+  </div>
+
+
+</div>
+
+  {% endblock %}
+
+    <!---------------------------------  THE END  ----------------------------------------->
